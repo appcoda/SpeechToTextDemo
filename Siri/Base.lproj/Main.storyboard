@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11185.3" systemVersion="15F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11151.4"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--View Controller-->
+        <scene sceneID="tne-QT-ifu">
+            <objects>
+                <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="Siri" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="y3c-jy-aDJ"/>
+                        <viewControllerLayoutGuide type="bottom" id="wfy-db-euE"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="What can I help you with?" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CtM-HG-XED">
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="92" id="4W9-pJ-fdN"/>
+                                    <constraint firstAttribute="width" constant="245" id="Yra-Qg-0po"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="AvenirNext-Regular" family="Avenir Next" pointSize="28"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" text="This is the UITextView" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="RL2-YE-xML">
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="291" id="NeV-Ix-1sE"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="AvenirNext-Regular" family="Avenir Next" pointSize="20"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                            </textView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wF6-O8-cvx">
+                                <state key="normal" title="Start Recording"/>
+                                <connections>
+                                    <action selector="microphoneTapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Miv-0u-Wyb"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstItem="wF6-O8-cvx" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="BaS-Rv-Wyg"/>
+                            <constraint firstItem="CtM-HG-XED" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="39" id="DUC-Aa-T81"/>
+                            <constraint firstItem="RL2-YE-xML" firstAttribute="top" secondItem="CtM-HG-XED" secondAttribute="bottom" constant="36" id="SXB-Yy-Fma"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="RL2-YE-xML" secondAttribute="trailing" id="V4E-Jf-a4s"/>
+                            <constraint firstItem="CtM-HG-XED" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="YUD-XV-vgR"/>
+                            <constraint firstAttribute="leadingMargin" secondItem="RL2-YE-xML" secondAttribute="leading" id="aeW-p6-z7J"/>
+                            <constraint firstItem="RL2-YE-xML" firstAttribute="centerX" secondItem="CtM-HG-XED" secondAttribute="centerX" id="cL7-Q1-eyo"/>
+                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="wF6-O8-cvx" secondAttribute="bottom" constant="30" id="rMQ-yb-tCj"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="microphoneButton" destination="wF6-O8-cvx" id="V9V-fM-n1g"/>
+                        <outlet property="textView" destination="RL2-YE-xML" id="WCI-r4-v5k"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="136.80000000000001" y="138.98050974512745"/>
+        </scene>
+    </scenes>
+</document>
