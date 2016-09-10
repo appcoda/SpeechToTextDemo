@@ -36,15 +36,12 @@ class ViewController: UIViewController, SFSpeechRecognizerDelegate {
                 isButtonEnabled = true
                 
             case .denied:
-                isButtonEnabled = false
                 print("User denied access to speech recognition")
                 
             case .restricted:
-                isButtonEnabled = false
                 print("Speech recognition restricted on this device")
                 
             case .notDetermined:
-                isButtonEnabled = false
                 print("Speech recognition not yet authorized")
             }
             
@@ -133,11 +130,7 @@ class ViewController: UIViewController, SFSpeechRecognizerDelegate {
     }
     
     func speechRecognizer(_ speechRecognizer: SFSpeechRecognizer, availabilityDidChange available: Bool) {
-        if available {
-            microphoneButton.isEnabled = true
-        } else {
-            microphoneButton.isEnabled = false
-        }
+        microphoneButton.isEnabled = available
     }
 }
 
