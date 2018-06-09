@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		52619C0420CBCE0B00912C95 /* FilesListVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52619C0320CBCE0B00912C95 /* FilesListVC.swift */; };
+		52619C0620CBCF7E00912C95 /* FileModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52619C0520CBCF7E00912C95 /* FileModel.swift */; };
 		805027EB1D389E5700CE3F1F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 805027EA1D389E5700CE3F1F /* AppDelegate.swift */; };
 		805027ED1D389E5700CE3F1F /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 805027EC1D389E5700CE3F1F /* ViewController.swift */; };
 		805027F01D389E5700CE3F1F /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 805027EE1D389E5700CE3F1F /* Main.storyboard */; };
@@ -15,6 +17,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		52619C0320CBCE0B00912C95 /* FilesListVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilesListVC.swift; sourceTree = "<group>"; };
+		52619C0520CBCF7E00912C95 /* FileModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileModel.swift; sourceTree = "<group>"; };
 		805027E71D389E5700CE3F1F /* Siri.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Siri.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		805027EA1D389E5700CE3F1F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		805027EC1D389E5700CE3F1F /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -56,6 +60,8 @@
 			children = (
 				805027EA1D389E5700CE3F1F /* AppDelegate.swift */,
 				805027EC1D389E5700CE3F1F /* ViewController.swift */,
+				52619C0520CBCF7E00912C95 /* FileModel.swift */,
+				52619C0320CBCE0B00912C95 /* FilesListVC.swift */,
 				805027EE1D389E5700CE3F1F /* Main.storyboard */,
 				805027F11D389E5700CE3F1F /* Assets.xcassets */,
 				805027F31D389E5700CE3F1F /* LaunchScreen.storyboard */,
@@ -96,9 +102,9 @@
 				TargetAttributes = {
 					805027E61D389E5700CE3F1F = {
 						CreatedOnToolsVersion = 8.0;
-						DevelopmentTeam = YZP52RND5S;
+						DevelopmentTeam = 6JB9XW3D3N;
 						DevelopmentTeamName = "Stephen Edrisian";
-						ProvisioningStyle = Automatic;
+						ProvisioningStyle = Manual;
 					};
 				};
 			};
@@ -139,7 +145,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				805027ED1D389E5700CE3F1F /* ViewController.swift in Sources */,
+				52619C0420CBCE0B00912C95 /* FilesListVC.swift in Sources */,
 				805027EB1D389E5700CE3F1F /* AppDelegate.swift in Sources */,
+				52619C0620CBCF7E00912C95 /* FileModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -256,11 +264,14 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				DEVELOPMENT_TEAM = YZP52RND5S;
+				CODE_SIGN_STYLE = Manual;
+				DEVELOPMENT_TEAM = 6JB9XW3D3N;
 				INFOPLIST_FILE = Siri/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.appcoda.Siri;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "46710618-664d-440e-a32e-0df58da69993";
+				PROVISIONING_PROFILE_SPECIFIER = "HBDevelopment Profile";
 				SWIFT_VERSION = 3.0;
 			};
 			name = Debug;
@@ -269,11 +280,14 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				DEVELOPMENT_TEAM = YZP52RND5S;
+				CODE_SIGN_STYLE = Manual;
+				DEVELOPMENT_TEAM = 6JB9XW3D3N;
 				INFOPLIST_FILE = Siri/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.appcoda.Siri;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "46710618-664d-440e-a32e-0df58da69993";
+				PROVISIONING_PROFILE_SPECIFIER = "HBDevelopment Profile";
 				SWIFT_VERSION = 3.0;
 			};
 			name = Release;

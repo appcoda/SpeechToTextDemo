@@ -9,6 +9,19 @@
 import UIKit
 import Speech
 
+var getDocumentsDirectory : URL {
+    let paths = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)
+    return paths[0]
+}
+
+var getTemporaryDirectory : URL {
+    let paths = NSTemporaryDirectory()
+    return URL(fileURLWithPath: paths).appendingPathComponent("tempAudio.caf")
+}
+
+let TEXT_FILE_DEFAULT_NAME = "Text file.text"
+let AUDIO_FILE_DEFAULT_NAME = "Audio file.caf"
+
 class ViewController: UIViewController, SFSpeechRecognizerDelegate {
 	
 	@IBOutlet weak var textView: UITextView!
@@ -19,6 +32,11 @@ class ViewController: UIViewController, SFSpeechRecognizerDelegate {
     private var recognitionRequest: SFSpeechAudioBufferRecognitionRequest?
     private var recognitionTask: SFSpeechRecognitionTask?
     private let audioEngine = AVAudioEngine()
+
+    var audioFile: AVAudioFile?
+    func getCurrentMillis() -> Int64 {
+        return  Int64(NSDate().timeIntervalSince1970 * 1000)
+    }
     
 	override func viewDidLoad() {
         super.viewDidLoad()
@@ -58,6 +76,7 @@ class ViewController: UIViewController, SFSpeechRecognizerDelegate {
         if audioEngine.isRunning {
             audioEngine.stop()
             recognitionRequest?.endAudio()
+            self.saveFilesInDocumentDirectory()
             microphoneButton.isEnabled = false
             microphoneButton.setTitle("Start Recording", for: .normal)
         } else {
@@ -65,9 +84,19 @@ class ViewController: UIViewController, SFSpeechRecognizerDelegate {
             microphoneButton.setTitle("Stop Recording", for: .normal)
         }
 	}
-
+    
+    @IBAction func listButtonTapped(_ sender: UIBarButtonItem) {
+        if audioEngine.isRunning {
+            audioEngine.stop()
+            recognitionRequest?.endAudio()
+            microphoneButton.isEnabled = false
+            microphoneButton.setTitle("Start Recording", for: .normal)
+        }
+        self.performSegue(withIdentifier: "show_files", sender: nil)
+    }
+    
+    
     func startRecording() {
-        
         if recognitionTask != nil {  //1
             recognitionTask?.cancel()
             recognitionTask = nil
@@ -91,45 +120,53 @@ class ViewController: UIViewController, SFSpeechRecognizerDelegate {
         guard let recognitionRequest = recognitionRequest else {
             fatalError("Unable to create an SFSpeechAudioBufferRecognitionRequest object")
         } //5
-        
         recognitionRequest.shouldReportPartialResults = true  //6
-        
         recognitionTask = speechRecognizer.recognitionTask(with: recognitionRequest, resultHandler: { (result, error) in  //7
-            
             var isFinal = false  //8
-            
             if result != nil {
-                
                 self.textView.text = result?.bestTranscription.formattedString  //9
                 isFinal = (result?.isFinal)!
             }
-            
             if error != nil || isFinal {  //10
                 self.audioEngine.stop()
                 inputNode.removeTap(onBus: 0)
-                
                 self.recognitionRequest = nil
                 self.recognitionTask = nil
-                
                 self.microphoneButton.isEnabled = true
             }
         })
-        
+        do {
+            audioFile = try AVAudioFile(forWriting: getTemporaryDirectory, settings: (audioEngine.inputNode?.inputFormat(forBus: 0).settings)!, commonFormat: (audioEngine.inputNode?.inputFormat(forBus: 0).commonFormat)!, interleaved: false)
+        }  catch let error {
+            print(error.localizedDescription)
+        }
         let recordingFormat = inputNode.outputFormat(forBus: 0)  //11
         inputNode.installTap(onBus: 0, bufferSize: 1024, format: recordingFormat) { (buffer, when) in
             self.recognitionRequest?.append(buffer)
+            do {
+                try self.audioFile?.write(from: buffer)
+            } catch let error {
+                print(error.localizedDescription)
+            }
         }
-        
         audioEngine.prepare()  //12
-        
         do {
             try audioEngine.start()
         } catch {
             print("audioEngine couldn't start because of an error.")
         }
-        
         textView.text = "Say something, I'm listening!"
-        
+    }
+    
+    func saveFilesInDocumentDirectory() {
+        let currentFilePath = getDocumentsDirectory.appendingPathComponent("\(getCurrentMillis())")
+        do {
+            try FileManager.default.createDirectory(at: currentFilePath, withIntermediateDirectories: false, attributes: nil)
+            try self.textView.text.write(to: currentFilePath.appendingPathComponent(TEXT_FILE_DEFAULT_NAME), atomically: true, encoding: .utf8)
+            try FileManager.default.moveItem(at: getTemporaryDirectory, to: currentFilePath.appendingPathComponent(AUDIO_FILE_DEFAULT_NAME))
+        } catch let error {
+            print(error.localizedDescription)
+        }
     }
     
     func speechRecognizer(_ speechRecognizer: SFSpeechRecognizer, availabilityDidChange available: Bool) {
